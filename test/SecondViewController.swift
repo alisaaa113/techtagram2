@@ -11,7 +11,7 @@ import Accounts
 
 class SecondViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    var filter1: Float = 0.5
+   // var filter1: Float = 1.0
     
     @IBOutlet var cameraImageView: UIImageView!
     
@@ -40,75 +40,6 @@ class SecondViewController: UIViewController, UIImagePickerControllerDelegate, U
         
     }
     
-    
-    //表示している画像にフィルター加工
-    @IBAction func applyFilter(){
-        
-        let filterImage: CIImage = CIImage(image: originalImage)!
-        
-        filter = CIFilter(name: "CIFalseColor")
-        filter.setValue(filterImage, forKey: kCIInputImageKey)
-        
-        let ctx = CIContext(options: nil)
-        let cgImage = ctx.createCGImage(filter.outputImage!, from: filter.outputImage!.extent)
-        cameraImageView.image = UIImage(cgImage: cgImage!)
-        
-    }
-    @IBAction func applyFilter2(){
-        
-        let filterImage: CIImage = CIImage(image: originalImage)!
-    
-        filter = CIFilter(name: "CISepiaTone", withInputParameters: ["inputIntensity": 1.0])
-        filter.setValue(filterImage, forKey: kCIInputImageKey)
-        
-        let ctx = CIContext(options: nil)
-        let cgImage = ctx.createCGImage(filter.outputImage!, from: filter.outputImage!.extent)
-        cameraImageView.image = UIImage(cgImage: cgImage!)
-        
-    }
-    @IBAction func applyFilter3(){
-        
-        let filterImage: CIImage = CIImage(image: originalImage)!
-        
-        filter = CIFilter(name: "CIColorMonochrome")
-        filter.setValue(filterImage, forKey: kCIInputImageKey)
-        
-        let ctx = CIContext(options: nil)
-        let cgImage = ctx.createCGImage(filter.outputImage!, from: filter.outputImage!.extent)
-        cameraImageView.image = UIImage(cgImage: cgImage!)
-        
-    }
-    @IBAction func applyFilter4(){
-        
-        let filterImage: CIImage = CIImage(image: originalImage)!
-        
-        filter = CIFilter(name: "CIColorInvert")
-        filter.setValue(filterImage, forKey: kCIInputImageKey)
-        
-        let ctx = CIContext(options: nil)
-        let cgImage = ctx.createCGImage(filter.outputImage!, from: filter.outputImage!.extent)
-        cameraImageView.image = UIImage(cgImage: cgImage!)
-        
-    }
-    
-    @IBAction func filter1Slider(sender: UISlider){
-        filter1 = sender.value
-        print(filter1)
-        let filterImage: CIImage = CIImage(image: originalImage)!
-        //フィルターの設定
-        filter = CIFilter(name: "CIColorControls")!
-        filter.setValue(filterImage, forKey: kCIInputImageKey)
-            
-        //彩度の調整
-        filter.setValue(filter1, forKey: "inputSaturation")
-        //明度の調整
-        filter.setValue(0.5, forKey: "inputBrightness")
-        //コントラストの調整
-        filter.setValue(2.5, forKey: "inputContrast")
-        let ctx = CIContext(options: nil)
-        let cgImage = ctx.createCGImage(filter.outputImage!, from: filter.outputImage!.extent)
-        cameraImageView.image = UIImage(cgImage: cgImage!)
-    }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         //タッチされた位置を取得
@@ -173,6 +104,108 @@ class SecondViewController: UIViewController, UIImagePickerControllerDelegate, U
         imageIndex = 8
     }
     
+    //表示している画像にフィルター加工
+    @IBAction func applyFilter(){
+        let filterImage: CIImage = CIImage(image: originalImage)!
+        
+        filter = CIFilter(name: "CIFalseColor")
+        filter.setValue(filterImage, forKey: kCIInputImageKey)
+        
+        let ctx = CIContext(options: nil)
+        let cgImage = ctx.createCGImage(filter.outputImage!, from: filter.outputImage!.extent)
+        cameraImageView.image = UIImage(cgImage: cgImage!)
+    }
+    
+    @IBAction func applyFilter2(){
+        let filterImage: CIImage = CIImage(image: originalImage)!
+        
+        filter = CIFilter(name: "CISepiaTone", withInputParameters: ["inputIntensity": 1.0])
+        filter.setValue(filterImage, forKey: kCIInputImageKey)
+        
+        let ctx = CIContext(options: nil)
+        let cgImage = ctx.createCGImage(filter.outputImage!, from: filter.outputImage!.extent)
+        cameraImageView.image = UIImage(cgImage: cgImage!)
+    }
+    
+    @IBAction func applyFilter3(){
+        let filterImage: CIImage = CIImage(image: originalImage)!
+        
+        filter = CIFilter(name: "CIColorMonochrome")
+        filter.setValue(filterImage, forKey: kCIInputImageKey)
+        
+        let ctx = CIContext(options: nil)
+        let cgImage = ctx.createCGImage(filter.outputImage!, from: filter.outputImage!.extent)
+        cameraImageView.image = UIImage(cgImage: cgImage!)
+    }
+    
+    @IBAction func applyFilter4(){
+        let filterImage: CIImage = CIImage(image: originalImage)!
+        
+        filter = CIFilter(name: "CIColorInvert")
+        filter.setValue(filterImage, forKey: kCIInputImageKey)
+        
+        let ctx = CIContext(options: nil)
+        let cgImage = ctx.createCGImage(filter.outputImage!, from: filter.outputImage!.extent)
+        cameraImageView.image = UIImage(cgImage: cgImage!)
+    }
+    
+    @IBAction func applyFilter5(){
+        let filterImage: CIImage = CIImage(image: originalImage)!
+        
+        filter = CIFilter(name: "CIEdges")
+        filter.setValue(filterImage, forKey: kCIInputImageKey)
+        
+        let ctx = CIContext(options: nil)
+        let cgImage = ctx.createCGImage(filter.outputImage!, from: filter.outputImage!.extent)
+        cameraImageView.image = UIImage(cgImage: cgImage!)
+    }
+    
+    @IBAction func applyFilter6(){
+        let filterImage: CIImage = CIImage(image: originalImage)!
+        
+        filter = CIFilter(name: "CIBumpDistortion")
+        filter.setValue(filterImage, forKey: kCIInputImageKey)
+        // filter.setValue(CIVector(x: 75,y: 75), forKey: kCIInputImageKey)
+        // filter.setValue(0.9, forKey: kCIInputImageKey)
+        // filter.setValue(100, forKey: kCIInputImageKey)
+        
+        let ctx = CIContext(options: nil)
+        let cgImage = ctx.createCGImage(filter.outputImage!, from: filter.outputImage!.extent)
+        cameraImageView.image = UIImage(cgImage: cgImage!)
+    }
+    
+    @IBAction func applyFilter7(){
+        let filterImage: CIImage = CIImage(image: originalImage)!
+        
+        filter = CIFilter(name: "CIMotionBlur")
+        filter.setValue(filterImage, forKey: kCIInputImageKey)
+        
+        let ctx = CIContext(options: nil)
+        let cgImage = ctx.createCGImage(filter.outputImage!, from: filter.outputImage!.extent)
+        cameraImageView.image = UIImage(cgImage: cgImage!)
+    }
+    
+    @IBAction func applyFilter8(){
+        
+        let filterImage: CIImage = CIImage(image: originalImage)!
+        
+        //フィルターの設定
+        filter = CIFilter(name: "CIColorControls")!
+        filter.setValue(filterImage, forKey: kCIInputImageKey)
+        //彩度の調整
+        filter.setValue(1.0, forKey: "inputSaturation")
+        //明度の調整
+        filter.setValue(0.5, forKey: "inputBrightness")
+        //コントラストの調整
+        filter.setValue(2.5, forKey: "inputContrast")
+        
+        let ctx = CIContext(options: nil)
+        let cgImage = ctx.createCGImage(filter.outputImage!, from: filter.outputImage!.extent)
+        cameraImageView.image = UIImage(cgImage: cgImage!)
+    }
+    
+    
+    
     //編集した画像保存
     @IBAction func save() {
         //画面上のスクリーンショットを取得
@@ -209,6 +242,7 @@ class SecondViewController: UIViewController, UIImagePickerControllerDelegate, U
     @IBAction func back() {
 //       self.presentingViewController?.presentationController?
 //        .dismiss(animated: true, completion: nil)
+        self.ImageView.removeFromSuperview()
     }
     
 
